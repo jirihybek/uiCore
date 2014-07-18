@@ -1,0 +1,243 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<title>uiCore DEMO</title>
+		<script type="text/javascript" src="uiCore.js"></script>
+		<style>
+			* {
+				margin: 0px;
+				padding: 0px;
+			}
+
+			body {
+				font-family: "Open Sans", Arial, sans-serif;
+				font-size: 12px;
+				background: #ffffff;
+				color: #333333;
+				padding: 30px;
+			}
+
+			.clear {
+				clear: both;
+			}
+
+			h1 {
+				font-weight: normal;
+				font-size: 38px;
+				margin-bottom: 30px;
+				color: #1f8cfa;
+			}
+
+			h1 span {
+				font-size: 31px;
+				color: #999999;
+			}
+
+			.case {
+				margin-bottom: 30px;
+				width: 622px;
+				float: left;
+				margin-right: 20px;
+			}
+
+			h2 {
+				font-size: 18px;
+				margin-bottom: 10px;
+			}
+
+			p {
+				margin-bottom: 12px;
+				text-align: justify;
+			}
+
+			.sandbox {
+				width: 622px;
+				margin-bottom: 20px;
+			}
+
+			.sandbox .container {
+				border: 1px solid #cccccc;
+				background: #f6f6f6;
+				padding: 10px;
+			}
+
+			.sandbox ul,
+			.sandbox ul.container {
+				padding-left: 26px;
+			}
+
+			.red { color: #ff0000; }
+			.blue { color: #1f8cfa; }
+
+			.code {
+				width: 600px;
+				background: #eeeeee;
+				border: 1px dashed #cccccc;
+				padding: 10px;
+				overflow-x: auto;
+			}
+
+			input[type=text] {
+				padding: 6px 6px;
+				background: #ffffff;
+				border: 1px solid #cccccc;
+				box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.1);
+				border-radius: 3px;
+			}
+
+			input[type=button] {
+				display: inline-block;
+				padding: 9px 14px 7px 14px;
+				border: 1px solid #cccccc;
+				border-radius: 3px;
+				
+				box-shadow: inset 0px 1px 0px #ffffff;
+				
+				text-align: center;
+				font-size: 12px;				
+				line-height: 14px;
+				color: #424242;
+				text-decoration: none;
+
+				cursor: pointer;
+
+				background: #f2f2f2;
+				background: -moz-linear-gradient(top,  #ffffff 0%, #ededed 100%);
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#ededed));
+				background: -webkit-linear-gradient(top,  #ffffff 0%,#ededed 100%);
+				background: -o-linear-gradient(top,  #ffffff 0%,#ededed 100%);
+				background: -ms-linear-gradient(top,  #ffffff 0%,#ededed 100%);
+				background: linear-gradient(to bottom,  #ffffff 0%,#ededed 100%);
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 );
+			}
+
+			input[type=button]:hover {
+				color: #ffffff;
+				border-color: #047ffc;
+				box-shadow: inset 0px 1px 0px #45a2ff;
+				background: #1586f8;
+				background: -moz-linear-gradient(top,  #2792fe 0%, #057bf3 100%);
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#057bf3), color-stop(100%,#057bf3));
+				background: -webkit-linear-gradient(top,  #2792fe 0%,#057bf3 100%);
+				background: -o-linear-gradient(top,  #2792fe 0%,#057bf3 100%);
+				background: -ms-linear-gradient(top,  #2792fe 0%,#057bf3 100%);
+				background: linear-gradient(to bottom,  #2792fe 0%,#057bf3 100%);
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2792fe', endColorstr='#057bf3',GradientType=0 );
+			}
+		</style>
+		<script type="text/javascript">
+			window.addEventListener("load", function(){
+
+			});
+		</script>
+	</head>
+	<body>
+		<h1>uiCore <span>/ simple JS functions collection</span></h1>
+
+		<div class="case">
+			<h2>uiId(id)</h2>
+			<p>Returns DOM element by id attribute.</p>
+			<div class="sandbox">
+				<p><input type="button" value="Find &lt;uiid-test&gt;" onClick="uiId('uiid-test').innerHTML = 'Found!';" /></p>
+				<div id="uiid-test" class="container">I'am &lt;uiid-test&gt;</div>
+			</div>
+			<pre class="code">//Example usage
+
+uiId('uiid-test').innerHTML = 'Found!';</pre>
+		</div>
+
+		<div class="case">
+			<h2>uiGet(selector, parent = document)</h2>
+			<p>Returns single DOM element by selector.</p>
+			<div class="sandbox" id="uiget-sandbox">
+				<p><input type="button" value="Make it red!" onClick="uiGet('.blue', uiId('uiget-sandbox')).className = 'container red';" /></p>
+				<div class="container blue">I'am &lt;.blue&gt;</div>
+			</div>
+			<pre class="code">//Example usage
+
+uiGet('.blue', uiId('uiget-sandbox')).className = 'container red';</pre>
+		</div>
+
+		<div class="clear"></div>
+
+		<div class="case">
+			<h2>uiEl(tagName, attributes, content, parent)</h2>
+			<p>Creates new DOM element, sets attributes, contents and optionally append to parent.</p>
+			<div class="sandbox">
+				<p><input type="button" value="Add new element" onClick="uiEl('li', { class: 'blue' }, 'Sample contents', uiId('uiel-parent'));" /></p>
+				<ul id="uiel-parent" class="container"></ul>
+			</div>
+			<pre class="code">//Example usage
+
+uiEl('li', { class: 'blue' }, 'Sample contents', uiId('uiel-parent'));
+
+	</pre>
+		</div>
+
+		<div class="case">
+			<h2>uiEach(selector, &lt;parent = document&gt;, callback)</h2>
+			<p>Calls callback for each element which matches selector and is child of parent.</p>
+			<div class="sandbox">
+				<p><input type="button" value="Change odd items color" onClick="uiEach('li:nth-child(odd)', uiId('uieach-parent'), function(el){ el.classList.toggle('red'); });" /></p>
+				<ul id="uieach-parent" class="container">
+					<li>Item 1</li>
+					<li>Item 2</li>
+					<li>Item 3</li>
+					<li>Item 4</li>
+				</ul>
+			</div>
+			<pre class="code">//Example usage
+
+uiEach('li:nth-child(odd)', uiId('uieach-parent'), function(el){
+	el.classList.toggle('red');
+});</pre>
+		</div>
+
+		<div class="clear"></div>
+
+		<div class="case">
+			<h2>uiEvent(element, eventName, &lt;preventDefault = false&gt;, handler)</h2>
+			<p>Attaches event to element using cross-browser way (handles IE non W3 pranks). Function also can handle "preventDefault" process. Function returns "eventResource" object required by uiEventRemove function.</p>
+			<div class="sandbox">
+				<p><input type="button" value="Bind onClick event" onClick="uiEvent(uiId('uievent-test1'), 'click', function(){ alert('Holy crap, it works!'); });" /></p>
+				<div id="uievent-test1" class="container" style="cursor: pointer;">Click me!</div>
+			</div>
+			<pre class="code">//Example usage
+
+uiEvent(uiId('uievent-test1'), 'click', function(){
+	alert('Holy crap, it works!');
+});
+
+	</pre>
+		</div>
+
+		<div class="case">
+			<h2>uiEventRemove(eventResource)</h2>
+			<p>Detaches event from element which has been attached by uiEvent function (using cross-browser way).<br />&nbsp;</p>
+			<script type="text/javascript">
+				var ev1 = null;
+			</script>
+			<div class="sandbox">
+				<p><input type="button" value="Remove onClick event" onClick="uiEventRemove(ev1);" /></p>
+				<div id="uievent-test2" class="container" style="cursor: pointer;">Click me!</div>
+			</div>
+			<script type="text/javascript">
+				ev1 = uiEvent(uiId('uievent-test2'), 'click', function(){
+					alert('Yeah, Iam still clickable');
+				});
+			</script>
+			<pre class="code">//Example usage
+
+var ev1 = uiEvent(uiId('uievent-test1'), 'click', function(){
+	alert('Yeah, Iam still clickable')
+});
+
+uiEventRemove(ev1);
+</pre>
+		</div>
+
+		<div class="clear"></div>
+
+	</body>
+</html>
